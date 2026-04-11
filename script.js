@@ -1,12 +1,3 @@
-/* =========================
-   PENTRASEC - CLEAN SCRIPT
-   FIXED VERSION
-========================= */
-
-
-/* =========================
-   SCAN SIMULATOR
-========================= */
 function runScan() {
   const url = document.getElementById("scanInput").value;
   const output = document.getElementById("scanOutput");
@@ -24,7 +15,7 @@ function runScan() {
     "Testing authentication flow...",
     "Probing input validation layers...",
     "Scanning API endpoints...",
-    "Analyzing session session management...",
+    "Analyzing session management...",
     "Running privilege escalation checks...",
     "Inspecting database response patterns..."
   ];
@@ -42,9 +33,13 @@ function runScan() {
 
   const risks = ["LOW", "MEDIUM", "HIGH", "CRITICAL"];
 
-  const randomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
-  const randomInt = (min, max) =>
-    Math.floor(Math.random() * (max - min + 1)) + min;
+  function randomItem(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+  }
+
+  function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
   output.textContent = "";
 
@@ -52,7 +47,7 @@ function runScan() {
 
   const interval = setInterval(() => {
     if (i < 6) {
-      output.textContent += randomItem(steps) + "\n";
+      output.textContent += steps[Math.floor(Math.random() * steps.length)] + "\n";
       i++;
     } else {
       clearInterval(interval);
@@ -82,41 +77,19 @@ function runScan() {
   }, 700);
 }
 
+document.getElementById('form').addEventListener('submit', function(e){
 
-/* =========================
-   FORMSPREE SAFE HANDLING
-   (NO INTERFERENCE)
-========================= */
-window.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("form");
-
-  if (!form) return;
-
-  form.addEventListener("submit", () => {
-    alert("Request received. Ensure you have authorization before testing.");
-    // IMPORTANT:
-    // Do NOT preventDefault
-    // Do NOT reset manually
-    // Do NOT submit manually
-  });
+  alert("Request received. Ensure you have authorization before any testing.");
+  this.reset();
 });
 
+let v = 0;
+let a = 0;
 
-/* =========================
-   LIVE COUNTERS (SAFE)
-========================= */
-window.addEventListener("DOMContentLoaded", () => {
-  let v = 0;
-  let a = 0;
+setInterval(() => {
+  v += Math.floor(Math.random() * 3);
+  a += Math.floor(Math.random() * 1);
 
-  const vulnEl = document.getElementById("vulnCount");
-  const appEl = document.getElementById("appsTested");
-
-  setInterval(() => {
-    v += Math.floor(Math.random() * 3);
-    a += Math.floor(Math.random() * 1);
-
-    if (vulnEl) vulnEl.textContent = v;
-    if (appEl) appEl.textContent = a;
-  }, 2000);
-});
+  document.getElementById("vulnCount").textContent = v;
+  document.getElementById("appsTested").textContent = a;
+}, 2000);
