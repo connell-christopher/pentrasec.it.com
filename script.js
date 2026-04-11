@@ -78,22 +78,22 @@ function runScan() {
 }
 
 
-// ✅ FIXED FORM HANDLER (IMPORTANT)
-const form = document.getElementById('form');
+/* ✅ FIXED FORM HANDLING (Formspree SAFE VERSION) */
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("form");
 
-if (form) {
-  form.addEventListener('submit', function(e){
-    e.preventDefault(); // 🔥 FIX: prevents empty/failed submissions
+  if (form) {
+    form.addEventListener("submit", function () {
+      alert("Request received. Ensure you have authorization before any testing.");
+      // ❌ NO preventDefault
+      // ❌ NO manual submit()
+      // ❌ NO reset() interfering with Formspree
+    });
+  }
+});
 
-    alert("Request received. Ensure you have authorization before any testing.");
 
-    this.submit(); // allow Formspree to receive data
-    this.reset();
-  });
-}
-
-
-// ✅ SAFE LIVE COUNTER (prevents crashes on missing elements)
+/* ✅ SAFE LIVE COUNTER (no crashes if elements missing) */
 let v = 0;
 let a = 0;
 
