@@ -77,11 +77,6 @@ function runScan() {
   }, 700);
 }
 
-document.getElementById('form').addEventListener('submit', function(e){
-
-  alert("Request received. Ensure you have authorization before any testing.");
-  this.reset();
-});
 
 let v = 0;
 let a = 0;
