@@ -185,6 +185,7 @@ input, textarea, select {
 
 .checkbox input:checked {
   filter: drop-shadow(0 0 6px #2563eb);
+  color: red;
 }
 
 /* FOOTER */
