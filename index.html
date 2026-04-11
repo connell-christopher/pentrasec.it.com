@@ -345,9 +345,9 @@ We focus on real-world web application security testing aligned with modern vuln
 
 <form id="form" action="https://formspree.io/f/mnjoeael" method="POST">
 
-  <input type="text" name="name" required>
-  <input type="email" name="email" required>
-  <input type="url" name="website" required>
+  <input type="text" name="name" placeholder="Name" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <input type="url" name="website" placeholder="Website URL" required>
 
   <select name="service" required>
     <option value="" disabled selected>Select Service</option>
@@ -356,20 +356,27 @@ We focus on real-world web application security testing aligned with modern vuln
     <option value="Enterprise Audit">Enterprise Audit</option>
   </select>
 
-  <textarea name="details" required></textarea>
+  <textarea name="details" placeholder="Project Details" required></textarea>
 
-  <input type="checkbox" name="authorization" required>
-
-<label class="checkbox" style="margin-top:15px; display:flex; gap:12px; align-items:flex-start; font-size:0.9rem; line-height:1.4;" style="margin-top:4px; transform:scale(1.2); accent-color:#ef4444;">
-  <span>
-    I confirm that I am the rightful owner of this website or I have explicit written authorization
-    from the owner to perform security testing on this system. I understand that unauthorized testing
-    is illegal and may result in legal consequences.
-  </span>
-</label>
+  <!-- FIXED SINGLE CHECKBOX (CRITICAL FIX) -->
+  <label class="checkbox" style="margin-top:15px; display:flex; gap:12px; align-items:flex-start; font-size:0.9rem; line-height:1.4;">
+    <input type="checkbox" name="authorization" required style="margin-top:4px; transform:scale(1.2); accent-color:#ef4444;">
+    <span>
+      I confirm that I am the rightful owner of this website or I have explicit written authorization
+      from the owner to perform security testing on this system. I understand that unauthorized testing
+      is illegal and may result in legal consequences.
+    </span>
+  </label>
 
   <button type="submit">Submit Request</button>
+
 </form>
+
+<p style="text-align:center; color:#60a5fa; font-weight:600;">
+  ✔ All findings are validated manually — no automated false positives
+</p>
+
+</section>
 
 <p style="text-align:center; color:#60a5fa; font-weight:600;">
   ✔ All findings are validated manually — no automated false positives
