@@ -352,23 +352,22 @@ We focus on real-world web application security testing aligned with modern vuln
   <input type="url" name="website" placeholder="Website URL" required>
 
   <select name="service" required>
-    <option value="">Select Service</option>
-    <option>Starter Scan</option>
-    <option>Professional Pentest</option>
-    <option>Enterprise Audit</option>
+    <option disabled selected value="">Select Service</option>
+    <option value="Starter Scan">Starter Scan</option>
+    <option value="Professional Pentest">Professional Pentest</option>
+    <option value="Enterprise Audit">Enterprise Audit</option>
   </select>
 
-  <textarea name="details" placeholder="Project Details" maxlength="50000"></textarea>
+  <textarea name="details" maxlength="50000" placeholder="Project Details" required></textarea>
 
-   <!-- FIXED CHECKBOX -->
-  <label class="checkbox" style="margin-top:15px; display:flex; gap:12px; align-items:flex-start; font-size:0.9rem; line-height:1.4;">
-  <input type="checkbox" required style="margin-top:4px; transform:scale(1.2); accent-color:#ef4444;">
-  <span>
-    I confirm that I am the rightful owner of this website or I have explicit written authorization
+  <label class="checkbox">
+    <input type="checkbox" name="authorization" required>
+    <span>
+       I confirm that I am the rightful owner of this website or I have explicit written authorization
     from the owner to perform security testing on this system. I understand that unauthorized testing
     is illegal and may result in legal consequences.
-  </span>
-</label>
+    </span>
+  </label>
 
   <button type="submit" class="submit-btn">
     Submit Request
