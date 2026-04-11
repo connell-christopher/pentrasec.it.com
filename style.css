@@ -1,0 +1,357 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  color: #e5e7eb;
+  background: #050814;
+  overflow-x: hidden;
+}
+
+/* Animated cyber grid background */
+body::before {
+  content: "";
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: rotate(15deg);
+  animation: moveGrid 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes moveGrid {
+  from { transform: translateY(0) rotate(15deg); }
+  to { transform: translateY(-60px) rotate(15deg); }
+}
+
+/* HEADER */
+header {
+  text-align: center;
+  padding: 90px 20px;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(59,130,246,0.2);
+}
+
+header h1 {
+  font-size: 3.2rem;
+  color: #60a5fa;
+}
+
+header p {
+  color: #cbd5e1;
+  margin-top: 10px;
+}
+
+.tagline {
+  color: #93c5fd;
+  margin-top: 10px;
+}
+
+/* TRUST BADGES */
+.badges {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.badge {
+  padding: 6px 12px;
+  border: 1px solid rgba(59,130,246,0.4);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  background: rgba(59,130,246,0.08);
+}
+
+/* BUTTON */
+button {
+  margin-top: 20px;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(37,99,235,0.4);
+}
+
+/* MAIN */
+main {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+/* CARDS */
+.card {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(59,130,246,0.15);
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(59,130,246,0.5);
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* PRICING */
+.pricing {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.price-card {
+  background: rgba(2,6,23,0.8);
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  transition: 0.3s;
+}
+
+.price-card:hover {
+  transform: translateY(-6px);
+  border-color: #60a5fa;
+}
+
+.price {
+  font-size: 1.5rem;
+  color: #60a5fa;
+  margin-top: 10px;
+}
+
+/* FORM */
+form {
+  background: rgba(15,23,42,0.7);
+  border: 1px solid rgba(59,130,246,0.2);
+  padding: 25px;
+  border-radius: 16px;
+}
+
+/* INPUTS */
+input, textarea, select {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  background: #0b1220;
+  color: white;
+}
+
+/* ✅ MODERN CHECKBOX (FIXED + PREMIUM UI) */
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 15px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  user-select: none;
+}
+
+.checkbox input {
+  width: 20px;
+  height: 20px;
+  accent-color: #2563eb;
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: 0.2s;
+}
+
+.checkbox input:checked {
+  filter: drop-shadow(0 0 6px #2563eb);
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #94a3b8;
+  border-top: 1px solid rgba(59,130,246,0.2);
+}
+
+/* FADE ANIMATION */
+.card, .price-card {
+  animation: fadeUp 0.6s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#riskBar {
+  box-shadow: 0 0 12px rgba(239,68,68,0.4);
+}
+
+/* FOOTER LINK STYLING (CYBER BLEND) */
+.footer-link {
+  color: #60a5fa;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s ease;
+  position: relative;
+}
+
+/* glow hover effect */
+.footer-link:hover {
+  color: #93c5fd;
+  text-shadow: 0 0 10px rgba(96,165,250,0.6);
+}
+
+/* animated underline */
+.footer-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background: linear-gradient(90deg, #2563eb, #60a5fa);
+  transition: width 0.3s ease;
+}
+
+.footer-link:hover::after {
+  width: 100%;
+}
+
+/* ===== PREMIUM SUBMIT BUTTON ===== */
+.submit-btn {
+  width: 100%;
+  padding: 16px 18px;
+  margin-top: 18px;
+  border: none;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: white;
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #2563eb, #1d4ed8, #0ea5e9);
+  background-size: 200% 200%;
+
+  box-shadow:
+    0 10px 30px rgba(37, 99, 235, 0.35),
+    0 0 20px rgba(14, 165, 233, 0.25);
+
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* animated gradient movement */
+.submit-btn {
+  animation: gradientShift 5s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* hover effect */
+.submit-btn:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow:
+    0 15px 40px rgba(37, 99, 235, 0.45),
+    0 0 35px rgba(14, 165, 233, 0.35);
+}
+
+/* click effect */
+.submit-btn:active {
+  transform: scale(0.98);
+}
+
+/* subtle glow sweep */
+.submit-btn::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: rgba(255,255,255,0.15);
+  transform: rotate(25deg);
+  transition: 0.5s;
+}
+
+.submit-btn:hover::after {
+  left: 120%;
+}
+
+#scanInput {
+  margin-top: 15px;
+  padding: 12px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  background: #0b1220;
+  color: white;
+}
+
+#scanOutput {
+  background: rgba(2,6,23,0.8);
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(59,130,246,0.2);
+  margin-top: 15px;
+}
+
+#scanInput {
+  margin-top: 15px;
+  padding: 14px;
+  width: 100%;
+  border-radius: 12px;
+  border: 1px solid rgba(59,130,246,0.2);
+  background: rgba(2,6,23,0.9);
+  color: white;
+  outline: none;
+  transition: 0.3s;
+}
+
+#scanInput:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 15px rgba(96,165,250,0.25);
+}
+
+#scanOutput {
+  background: rgba(2,6,23,0.9);
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(59,130,246,0.25);
+  margin-top: 15px;
+  font-family: monospace;
+  white-space: pre-line;
+  min-height: 120px;
+}
+
+.identity {
+  color: deepskyblue;
+}
