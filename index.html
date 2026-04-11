@@ -343,25 +343,24 @@ We focus on real-world web application security testing aligned with modern vuln
 <section id="contact" class="card">
 <h2>Request Security Assessment</h2>
 
-<form id="form" action="https://formspree.io/f/mnjoeael" method="POST">
+<form action="https://formspree.io/f/mnjoeael" method="POST">
 
-  <input type="text" name="name" placeholder="Name" required>
-
-  <input type="email" name="email" placeholder="Email" required>
-
-  <input type="url" name="website" placeholder="Website URL" required>
+  <input type="text" name="name" required>
+  <input type="email" name="email" required>
+  <input type="url" name="website" required>
 
   <select name="service" required>
-    <option value="">Select Service</option>
-    <option>Starter Scan</option>
-    <option>Professional Pentest</option>
-    <option>Enterprise Audit</option>
+    <option value="" disabled selected>Select Service</option>
+    <option value="Starter Scan">Starter Scan</option>
+    <option value="Professional Pentest">Professional Pentest</option>
+    <option value="Enterprise Audit">Enterprise Audit</option>
   </select>
 
-  <textarea name="details" placeholder="Project Details" maxlength="50000"></textarea>
+  <textarea name="details" required></textarea>
 
-   <!-- FIXED CHECKBOX -->
-  <label class="checkbox" name="authorization" style="margin-top:15px; display:flex; gap:12px; align-items:flex-start; font-size:0.9rem; line-height:1.4;">
+  <input type="checkbox" name="authorization" required>
+
+    <label class="checkbox" name="authorization" style="margin-top:15px; display:flex; gap:12px; align-items:flex-start; font-size:0.9rem; line-height:1.4;">
   <input type="checkbox" required style="margin-top:4px; transform:scale(1.2); accent-color:#ef4444;">
   <span>
     I confirm that I am the rightful owner of this website or I have explicit written authorization
@@ -370,10 +369,7 @@ We focus on real-world web application security testing aligned with modern vuln
   </span>
 </label>
 
-  <button type="submit" class="submit-btn">
-    Submit Request
-  </button>
-
+  <button type="submit">Submit Request</button>
 </form>
 
 <p style="text-align:center; color:#60a5fa; font-weight:600;">
