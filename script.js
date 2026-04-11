@@ -47,7 +47,7 @@ function runScan() {
 
   const interval = setInterval(() => {
     if (i < 6) {
-      output.textContent += steps[Math.floor(Math.random() * steps.length)] + "\n";
+      output.textContent += randomItem(steps) + "\n";
       i++;
     } else {
       clearInterval(interval);
@@ -77,19 +77,33 @@ function runScan() {
   }, 700);
 }
 
-document.getElementById('form').addEventListener('submit', function(e){
 
-  alert("Request received. Ensure you have authorization before any testing.");
-  this.reset();
-});
+// ✅ FIXED FORM HANDLER (IMPORTANT)
+const form = document.getElementById('form');
 
+if (form) {
+  form.addEventListener('submit', function(e){
+    e.preventDefault(); // 🔥 FIX: prevents empty/failed submissions
+
+    alert("Request received. Ensure you have authorization before any testing.");
+
+    this.submit(); // allow Formspree to receive data
+    this.reset();
+  });
+}
+
+
+// ✅ SAFE LIVE COUNTER (prevents crashes on missing elements)
 let v = 0;
 let a = 0;
+
+const vulnEl = document.getElementById("vulnCount");
+const appEl = document.getElementById("appsTested");
 
 setInterval(() => {
   v += Math.floor(Math.random() * 3);
   a += Math.floor(Math.random() * 1);
 
-  document.getElementById("vulnCount").textContent = v;
-  document.getElementById("appsTested").textContent = a;
+  if (vulnEl) vulnEl.textContent = v;
+  if (appEl) appEl.textContent = a;
 }, 2000);
