@@ -1,3 +1,12 @@
+/* =========================
+   PENTRASEC - CLEAN SCRIPT
+   FIXED VERSION
+========================= */
+
+
+/* =========================
+   SCAN SIMULATOR
+========================= */
 function runScan() {
   const url = document.getElementById("scanInput").value;
   const output = document.getElementById("scanOutput");
@@ -15,7 +24,7 @@ function runScan() {
     "Testing authentication flow...",
     "Probing input validation layers...",
     "Scanning API endpoints...",
-    "Analyzing session management...",
+    "Analyzing session session management...",
     "Running privilege escalation checks...",
     "Inspecting database response patterns..."
   ];
@@ -33,13 +42,9 @@ function runScan() {
 
   const risks = ["LOW", "MEDIUM", "HIGH", "CRITICAL"];
 
-  function randomItem(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-  }
-
-  function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+  const randomItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  const randomInt = (min, max) =>
+    Math.floor(Math.random() * (max - min + 1)) + min;
 
   output.textContent = "";
 
@@ -78,32 +83,40 @@ function runScan() {
 }
 
 
-/* ✅ FIXED FORM HANDLING (Formspree SAFE VERSION) */
-document.addEventListener("DOMContentLoaded", () => {
+/* =========================
+   FORMSPREE SAFE HANDLING
+   (NO INTERFERENCE)
+========================= */
+window.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form");
 
-  if (form) {
-    form.addEventListener("submit", function () {
-      alert("Request received. Ensure you have authorization before any testing.");
-      // ❌ NO preventDefault
-      // ❌ NO manual submit()
-      // ❌ NO reset() interfering with Formspree
-    });
-  }
+  if (!form) return;
+
+  form.addEventListener("submit", () => {
+    alert("Request received. Ensure you have authorization before testing.");
+    // IMPORTANT:
+    // Do NOT preventDefault
+    // Do NOT reset manually
+    // Do NOT submit manually
+  });
 });
 
 
-/* ✅ SAFE LIVE COUNTER (no crashes if elements missing) */
-let v = 0;
-let a = 0;
+/* =========================
+   LIVE COUNTERS (SAFE)
+========================= */
+window.addEventListener("DOMContentLoaded", () => {
+  let v = 0;
+  let a = 0;
 
-const vulnEl = document.getElementById("vulnCount");
-const appEl = document.getElementById("appsTested");
+  const vulnEl = document.getElementById("vulnCount");
+  const appEl = document.getElementById("appsTested");
 
-setInterval(() => {
-  v += Math.floor(Math.random() * 3);
-  a += Math.floor(Math.random() * 1);
+  setInterval(() => {
+    v += Math.floor(Math.random() * 3);
+    a += Math.floor(Math.random() * 1);
 
-  if (vulnEl) vulnEl.textContent = v;
-  if (appEl) appEl.textContent = a;
-}, 2000);
+    if (vulnEl) vulnEl.textContent = v;
+    if (appEl) appEl.textContent = a;
+  }, 2000);
+});
