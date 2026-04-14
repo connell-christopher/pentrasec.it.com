@@ -11,26 +11,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Animated cyber grid background */
-body::before {
-  content: "";
-  position: fixed;
-  width: 200%;
-  height: 200%;
-  background-image:
-    linear-gradient(rgba(59,130,246,0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59,130,246,0.08) 1px, transparent 1px);
-  background-size: 60px 60px;
-  transform: rotate(15deg);
-  animation: moveGrid 20s linear infinite;
-  z-index: -1;
-}
-
-@keyframes moveGrid {
-  from { transform: translateY(0) rotate(15deg); }
-  to { transform: translateY(-60px) rotate(15deg); }
-}
-
 body::after {
   content: "";
   position: fixed;
@@ -68,6 +48,23 @@ body::before {
   animation: neuralDrift 25s ease-in-out infinite alternate;
 }
 
+/* subtle flowing motion */
+@keyframes neuralDrift {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(2deg) scale(1.05);
+  }
+  100% {
+    transform: rotate(-2deg) scale(1.1);
+  }
+}
+
+@keyframes moveGrid {
+  from { transform: translateY(0) rotate(15deg); }
+  to { transform: translateY(-60px) rotate(15deg); }
+}
 
 /* HEADER */
 header {
@@ -223,7 +220,6 @@ input, textarea, select {
 
 .checkbox input:checked {
   filter: drop-shadow(0 0 6px #2563eb);
-  accent-color: red;
 }
 
 /* FOOTER */
@@ -278,6 +274,7 @@ footer {
 .footer-link:hover::after {
   width: 100%;
 }
+
 
 /* ===== PREMIUM SUBMIT BUTTON ===== */
 .submit-btn {
