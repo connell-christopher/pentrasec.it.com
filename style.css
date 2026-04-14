@@ -11,7 +11,35 @@ body {
   overflow-x: hidden;
 }
 
-/* === PentraSec Neural Flux Background (FINAL) === */
+/* Animated cyber grid background */
+body::before {
+  content: "";
+  position: fixed;
+  width: 200%;
+  height: 200%;
+  background-image:
+    linear-gradient(rgba(59,130,246,0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.08) 1px, transparent 1px);
+  background-size: 60px 60px;
+  transform: rotate(15deg);
+  animation: moveGrid 20s linear infinite;
+  z-index: -1;
+}
+
+@keyframes moveGrid {
+  from { transform: translateY(0) rotate(15deg); }
+  to { transform: translateY(-60px) rotate(15deg); }
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 60%, rgba(0,0,0,0.4));
+  z-index: -1;
+}
+
+/* === PentraSec Neural Flux Background === */
 body::before {
   content: "";
   position: fixed;
@@ -40,24 +68,6 @@ body::before {
   animation: neuralDrift 25s ease-in-out infinite alternate;
 }
 
-/* Dark overlay */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at center, transparent 60%, rgba(0,0,0,0.4));
-  z-index: -1;
-}
-
-/* Neural animation */
-@keyframes neuralDrift {
-  from {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  to {
-    transform: translate3d(-40px, 30px, 0) scale(1.1);
-  }
-}
 
 /* HEADER */
 header {
@@ -191,7 +201,7 @@ input, textarea, select {
   color: white;
 }
 
-/* CHECKBOX */
+/* ✅ MODERN CHECKBOX (FIXED + PREMIUM UI) */
 .checkbox {
   display: flex;
   align-items: center;
@@ -238,7 +248,7 @@ footer {
   box-shadow: 0 0 12px rgba(239,68,68,0.4);
 }
 
-/* FOOTER LINKS */
+/* FOOTER LINK STYLING (CYBER BLEND) */
 .footer-link {
   color: #60a5fa;
   text-decoration: none;
@@ -247,11 +257,13 @@ footer {
   position: relative;
 }
 
+/* glow hover effect */
 .footer-link:hover {
   color: #93c5fd;
   text-shadow: 0 0 10px rgba(96,165,250,0.6);
 }
 
+/* animated underline */
 .footer-link::after {
   content: "";
   position: absolute;
@@ -267,7 +279,7 @@ footer {
   width: 100%;
 }
 
-/* SUBMIT BUTTON */
+/* ===== PREMIUM SUBMIT BUTTON ===== */
 .submit-btn {
   width: 100%;
   padding: 16px 18px;
@@ -282,7 +294,6 @@ footer {
 
   background: linear-gradient(135deg, #2563eb, #1d4ed8, #0ea5e9);
   background-size: 200% 200%;
-  animation: gradientShift 5s ease infinite;
 
   box-shadow:
     0 10px 30px rgba(37, 99, 235, 0.35),
@@ -293,12 +304,18 @@ footer {
   overflow: hidden;
 }
 
+/* animated gradient movement */
+.submit-btn {
+  animation: gradientShift 5s ease infinite;
+}
+
 @keyframes gradientShift {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
+/* hover effect */
 .submit-btn:hover {
   transform: translateY(-3px) scale(1.02);
   box-shadow:
@@ -306,10 +323,12 @@ footer {
     0 0 35px rgba(14, 165, 233, 0.35);
 }
 
+/* click effect */
 .submit-btn:active {
   transform: scale(0.98);
 }
 
+/* subtle glow sweep */
 .submit-btn::after {
   content: "";
   position: absolute;
@@ -326,7 +345,24 @@ footer {
   left: 120%;
 }
 
-/* SCAN INPUT */
+#scanInput {
+  margin-top: 15px;
+  padding: 12px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #1f2937;
+  background: #0b1220;
+  color: white;
+}
+
+#scanOutput {
+  background: rgba(2,6,23,0.8);
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid rgba(59,130,246,0.2);
+  margin-top: 15px;
+}
+
 #scanInput {
   margin-top: 15px;
   padding: 14px;
@@ -344,7 +380,6 @@ footer {
   box-shadow: 0 0 15px rgba(96,165,250,0.25);
 }
 
-/* SCAN OUTPUT */
 #scanOutput {
   background: rgba(2,6,23,0.9);
   padding: 18px;
