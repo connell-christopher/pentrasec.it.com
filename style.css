@@ -31,6 +31,44 @@ body::before {
   to { transform: translateY(-60px) rotate(15deg); }
 }
 
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 60%, rgba(0,0,0,0.4));
+  z-index: -1;
+}
+
+/* === PentraSec Neural Flux Background === */
+body::before {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: -1;
+
+  background:
+    radial-gradient(circle at 20% 30%, rgba(59,130,246,0.12), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(59,130,246,0.10), transparent 45%),
+    radial-gradient(circle at 60% 20%, rgba(59,130,246,0.08), transparent 50%),
+
+    repeating-conic-gradient(
+      from 0deg at 50% 50%,
+      rgba(59,130,246,0.05) 0deg 2deg,
+      transparent 2deg 10deg
+    ),
+
+    linear-gradient(
+      120deg,
+      rgba(59,130,246,0.03),
+      rgba(59,130,246,0.06),
+      rgba(59,130,246,0.02)
+    );
+
+  filter: blur(40px) contrast(120%);
+  animation: neuralDrift 25s ease-in-out infinite alternate;
+}
+
+
 /* HEADER */
 header {
   text-align: center;
