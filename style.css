@@ -11,14 +11,6 @@ body {
   overflow-x: hidden;
 }
 
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at center, transparent 60%, rgba(0,0,0,0.4));
-  z-index: -1;
-}
-
 /* === PentraSec Neural Flux Background === */
 body::before {
   content: "";
@@ -390,4 +382,8 @@ footer {
 
 .identity {
   color: deepskyblue;
+}
+
+.check-box {
+        color:red;
 }
