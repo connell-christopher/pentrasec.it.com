@@ -1,10 +1,45 @@
+const btn = document.getElementById("scanBtn");
+btn.disabled = true;
 function runScan() {
-  const url = document.getElementById("scanInput").value;
+  const url = document.getElementById("scanInput").value.trim();
   const output = document.getElementById("scanOutput");
 
-  if (!url) {
-    output.textContent = "Please enter a valid URL...";
+  // ✅ URL validation
+  function isValidURL(url) {
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  if (!isValidURL(url)) {
+    output.textContent = "Please enter a valid URL (e.g. https://example.com)";
     return;
+  }
+
+  // 🔐 Deterministic seed (same URL = same results)
+  function hashCode(str) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return Math.abs(hash);
+  }
+
+  const seed = hashCode(url);
+
+  function seededRandom(n) {
+    return (Math.sin(seed + n) + 1) / 2;
+  }
+
+  function pick(arr, n) {
+    return arr[Math.floor(seededRandom(n) * arr.length)];
+  }
+
+  function rand(min, max, n) {
+    return Math.floor(seededRandom(n) * (max - min + 1)) + min;
   }
 
   const steps = [
@@ -33,34 +68,27 @@ function runScan() {
 
   const risks = ["LOW", "MEDIUM", "HIGH", "CRITICAL"];
 
-  function randomItem(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-  }
-
-  function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
   output.textContent = "";
 
   let i = 0;
 
   const interval = setInterval(() => {
     if (i < 6) {
-      output.textContent += steps[Math.floor(Math.random() * steps.length)] + "\n";
+      output.textContent += pick(steps, i) + "\n";
       i++;
     } else {
       clearInterval(interval);
 
-      const vulnCount = randomInt(3, 15);
-      const risk = randomItem(risks);
+      const vulnCount = rand(3, 12, 1);
+      const risk = pick(risks, 2);
 
       output.textContent += "\n--- SCAN COMPLETE ---\n";
       output.textContent += "Target: " + url + "\n\n";
 
       output.textContent += "Findings:\n";
+
       for (let j = 0; j < vulnCount; j++) {
-        output.textContent += "• " + randomItem(findings) + "\n";
+        output.textContent += "• " + pick(findings, j + 10) + "\n";
       }
 
       output.textContent += "\nVulnerabilities Detected: " + vulnCount + "\n";
@@ -73,6 +101,9 @@ function runScan() {
       } else {
         output.textContent += "Recommendation: Monitor and improve security posture\n";
       }
+
+      output.textContent += "\nNote: This is a simulated preview. Full manual testing is performed during an official engagement.";
     }
-  }, 700);
+  }, 600);
 }
+btn.disabled = false;
