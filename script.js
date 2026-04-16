@@ -76,23 +76,3 @@ function runScan() {
     }
   }, 700);
 }
-</script>
-
-<script>
-document.getElementById('form').addEventListener('submit', function(e){
-
-  alert("Request received. Ensure you have authorization before any testing.");
-  this.reset();
-});
-</script>
-<script>
-let v = 0;
-let a = 0;
-
-setInterval(() => {
-  v += Math.floor(Math.random() * 3);
-  a += Math.floor(Math.random() * 1);
-
-  document.getElementById("vulnCount").textContent = v;
-  document.getElementById("appsTested").textContent = a;
-}, 2000);
