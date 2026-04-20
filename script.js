@@ -36,42 +36,26 @@ async function runScan() {
     }
   }
 
-  output.textContent = "";
+  function runScan() {
+  const url = document.getElementById("scanInput").value;
+  const output = document.getElementById("scanOutput");
 
-  if (!isValidURL(urlInput)) {
-    await typeLine(output, "Enter a valid URL (http/https required)", 20);
-    return;
-  }
-
-  const url = new URL(urlInput);
-
-  // ❌ block unrealistic targets
-  if (url.hostname.includes("localhost") || url.hostname.split(".").length < 2) {
-    await typeLine(output, "Target does not appear to be a valid public domain.", 20);
+  if (!url) {
+    output.textContent = "Please enter a valid URL...";
     return;
   }
 
   const steps = [
     "Initializing PentraSec kernel...",
-    "Resolving DNS...",
-    "Establishing TLS handshake...",
+    "Establishing secure connection...",
     "Fingerprinting target environment...",
     "Mapping application routes...",
-    "Enumerating endpoints...",
     "Testing authentication flow...",
+    "Probing input validation layers...",
     "Scanning API endpoints...",
     "Analyzing session management...",
-    "Running privilege escalation checks..."
-  ];
-
-  const endpoints = [
-    "/login",
-    "/api/v1/auth",
-    "/dashboard",
-    "/admin",
-    "/api/v1/users",
-    "/reset-password",
-    "/internal/config"
+    "Running privilege escalation checks...",
+    "Inspecting database response patterns..."
   ];
 
   const findings = [
@@ -85,78 +69,51 @@ async function runScan() {
     "Exposed internal endpoint detected"
   ];
 
-  // 🔀 shuffle
-  function shuffle(arr) {
-    return [...arr].sort(() => Math.random() - 0.5);
+  const risks = ["LOW", "MEDIUM", "HIGH", "CRITICAL"];
+
+  function randomItem(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
   }
 
-  function rand(min, max) {
+  function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  let discoveredFindings = [];
+  output.textContent = "";
 
-  // 🧠 step-by-step scan
-  for (let i = 0; i < steps.length; i++) {
-    await typeLine(output, steps[i], 12);
+  let i = 0;
 
-    // 🔍 endpoint discovery
-    if (i === 4) {
-      const epList = shuffle(endpoints).slice(0, rand(2, 5));
-      for (const ep of epList) {
-        await typeLine(output, "  ↳ Discovered endpoint: " + ep, 10);
+  const interval = setInterval(() => {
+    if (i < 6) {
+      output.textContent += steps[Math.floor(Math.random() * steps.length)] + "\n";
+      i++;
+    } else {
+      clearInterval(interval);
+
+      const vulnCount = randomInt(3, 15);
+      const risk = randomItem(risks);
+
+      output.textContent += "\n--- SCAN COMPLETE ---\n";
+      output.textContent += "Target: " + url + "\n\n";
+
+      output.textContent += "Findings:\n";
+      for (let j = 0; j < vulnCount; j++) {
+        output.textContent += "• " + randomItem(findings) + "\n";
+      }
+
+      output.textContent += "\nVulnerabilities Detected: " + vulnCount + "\n";
+      output.textContent += "Risk Level: " + risk + "\n";
+
+      if (risk === "CRITICAL") {
+        output.textContent += "Recommendation: Immediate action required ⚠\n";
+      } else if (risk === "HIGH") {
+        output.textContent += "Recommendation: Urgent review recommended\n";
+      } else {
+        output.textContent += "Recommendation: Monitor and improve security posture\n";
       }
     }
-
-    // ⚠ progressive findings
-    if (i >= 6 && Math.random() > 0.5) {
-      const f = shuffle(findings)[0];
-
-      if (!discoveredFindings.includes(f)) {
-        discoveredFindings.push(f);
-        await typeLine(output, "  ⚠ Finding: " + f, 10);
-      }
-    }
-  }
-
-  // 🧠 risk calculation
-  const riskWeights = { LOW: 0, MEDIUM: 0, HIGH: 0, CRITICAL: 0 };
-
-  discoveredFindings.forEach(f => {
-    if (f.includes("SQL") || f.includes("XSS")) riskWeights.CRITICAL++;
-    else if (f.includes("authentication")) riskWeights.HIGH++;
-    else if (f.includes("headers")) riskWeights.MEDIUM++;
-    else riskWeights.LOW++;
-  });
-
-  const risk = Object.keys(riskWeights).reduce((a, b) =>
-    riskWeights[a] > riskWeights[b] ? a : b
-  );
-
-  // 🧾 final output
-  await typeLine(output, "\n--- SCAN COMPLETE ---", 15);
-  await typeLine(output, "Target: " + url.href, 15);
-
-  await typeLine(output, "\nFinal Findings:", 15);
-
-  if (discoveredFindings.length === 0) {
-    await typeLine(output, "• No significant issues detected", 12);
-  } else {
-    for (const f of discoveredFindings) {
-      await typeLine(output, "• " + f, 10);
-    }
-  }
-
-  await typeLine(output, "\nVulnerabilities Detected: " + discoveredFindings.length, 15);
-  await typeLine(output, "Risk Level: " + risk, 15);
-
-  if (risk === "CRITICAL") {
-    await typeLine(output, "Recommendation: Immediate action required ⚠", 15);
-  } else if (risk === "HIGH") {
-    await typeLine(output, "Recommendation: Urgent review recommended", 15);
-  } else {
-    await typeLine(output, "Recommendation: Monitor and improve security posture", 15);
-  }
+  }, 700);
+}
 
   await typeLine(
     output,
