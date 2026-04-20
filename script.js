@@ -1,4 +1,4 @@
-<script>
+
 function runScan() {
   const url = document.getElementById("scanInput").value;
   const output = document.getElementById("scanOutput");
@@ -97,4 +97,4 @@ setInterval(() => {
   document.getElementById("vulnCount").textContent = v;
   document.getElementById("appsTested").textContent = a;
 }, 2000);
-</script>
+
