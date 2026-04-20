@@ -1,58 +1,77 @@
 const btn = document.getElementById("scanBtn");
-btn.disabled = true;
-function runScan() {
-  const url = document.getElementById("scanInput").value.trim();
+btn.disabled = false;
+
+// ⌨️ Typewriter effect
+function typeLine(element, text, speed = 15) {
+  return new Promise(resolve => {
+    let i = 0;
+
+    function type() {
+      if (i < text.length) {
+        element.textContent += text.charAt(i);
+        i++;
+        setTimeout(type, speed);
+      } else {
+        element.textContent += "\n";
+        element.scrollTop = element.scrollHeight; // auto-scroll
+        resolve();
+      }
+    }
+
+    type();
+  });
+}
+
+async function runScan() {
+  const urlInput = document.getElementById("scanInput").value.trim();
   const output = document.getElementById("scanOutput");
 
   // ✅ URL validation
-  function isValidURL(url) {
+  function isValidURL(str) {
     try {
-      new URL(url);
-      return true;
+      const u = new URL(str);
+      return u.protocol === "http:" || u.protocol === "https:";
     } catch {
       return false;
     }
   }
 
-  if (!isValidURL(url)) {
-    output.textContent = "Please enter a valid URL (e.g. https://example.com)";
+  output.textContent = "";
+
+  if (!isValidURL(urlInput)) {
+    await typeLine(output, "Enter a valid URL (http/https required)", 20);
     return;
   }
 
-  // 🔐 Deterministic seed (same URL = same results)
-  function hashCode(str) {
-    let hash = 0;
-    for (let i = 0; i < str.length; i++) {
-      hash = str.charCodeAt(i) + ((hash << 5) - hash);
-    }
-    return Math.abs(hash);
-  }
+  const url = new URL(urlInput);
 
-  const seed = hashCode(url);
-
-  function seededRandom(n) {
-    return (Math.sin(seed + n) + 1) / 2;
-  }
-
-  function pick(arr, n) {
-    return arr[Math.floor(seededRandom(n) * arr.length)];
-  }
-
-  function rand(min, max, n) {
-    return Math.floor(seededRandom(n) * (max - min + 1)) + min;
+  // ❌ block unrealistic targets
+  if (url.hostname.includes("localhost") || url.hostname.split(".").length < 2) {
+    await typeLine(output, "Target does not appear to be a valid public domain.", 20);
+    return;
   }
 
   const steps = [
     "Initializing PentraSec kernel...",
-    "Establishing secure connection...",
+    "Resolving DNS...",
+    "Establishing TLS handshake...",
     "Fingerprinting target environment...",
     "Mapping application routes...",
+    "Enumerating endpoints...",
     "Testing authentication flow...",
-    "Probing input validation layers...",
     "Scanning API endpoints...",
     "Analyzing session management...",
-    "Running privilege escalation checks...",
-    "Inspecting database response patterns..."
+    "Running privilege escalation checks..."
+  ];
+
+  const endpoints = [
+    "/login",
+    "/api/v1/auth",
+    "/dashboard",
+    "/admin",
+    "/api/v1/users",
+    "/reset-password",
+    "/internal/config"
   ];
 
   const findings = [
@@ -66,44 +85,82 @@ function runScan() {
     "Exposed internal endpoint detected"
   ];
 
-  const risks = ["LOW", "MEDIUM", "HIGH", "CRITICAL"];
+  // 🔀 shuffle
+  function shuffle(arr) {
+    return [...arr].sort(() => Math.random() - 0.5);
+  }
 
-  output.textContent = "";
+  function rand(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
-  let i = 0;
+  let discoveredFindings = [];
 
-  const interval = setInterval(() => {
-    if (i < 6) {
-      output.textContent += pick(steps, i) + "\n";
-      i++;
-    } else {
-      clearInterval(interval);
+  // 🧠 step-by-step scan
+  for (let i = 0; i < steps.length; i++) {
+    await typeLine(output, steps[i], 12);
 
-      const vulnCount = rand(3, 12, 1);
-      const risk = pick(risks, 2);
-
-      output.textContent += "\n--- SCAN COMPLETE ---\n";
-      output.textContent += "Target: " + url + "\n\n";
-
-      output.textContent += "Findings:\n";
-
-      for (let j = 0; j < vulnCount; j++) {
-        output.textContent += "• " + pick(findings, j + 10) + "\n";
+    // 🔍 endpoint discovery
+    if (i === 4) {
+      const epList = shuffle(endpoints).slice(0, rand(2, 5));
+      for (const ep of epList) {
+        await typeLine(output, "  ↳ Discovered endpoint: " + ep, 10);
       }
-
-      output.textContent += "\nVulnerabilities Detected: " + vulnCount + "\n";
-      output.textContent += "Risk Level: " + risk + "\n";
-
-      if (risk === "CRITICAL") {
-        output.textContent += "Recommendation: Immediate action required ⚠\n";
-      } else if (risk === "HIGH") {
-        output.textContent += "Recommendation: Urgent review recommended\n";
-      } else {
-        output.textContent += "Recommendation: Monitor and improve security posture\n";
-      }
-
-      output.textContent += "\nNote: This is a simulated preview. Full manual testing is performed during an official engagement.";
     }
-  }, 600);
+
+    // ⚠ progressive findings
+    if (i >= 6 && Math.random() > 0.5) {
+      const f = shuffle(findings)[0];
+
+      if (!discoveredFindings.includes(f)) {
+        discoveredFindings.push(f);
+        await typeLine(output, "  ⚠ Finding: " + f, 10);
+      }
+    }
+  }
+
+  // 🧠 risk calculation
+  const riskWeights = { LOW: 0, MEDIUM: 0, HIGH: 0, CRITICAL: 0 };
+
+  discoveredFindings.forEach(f => {
+    if (f.includes("SQL") || f.includes("XSS")) riskWeights.CRITICAL++;
+    else if (f.includes("authentication")) riskWeights.HIGH++;
+    else if (f.includes("headers")) riskWeights.MEDIUM++;
+    else riskWeights.LOW++;
+  });
+
+  const risk = Object.keys(riskWeights).reduce((a, b) =>
+    riskWeights[a] > riskWeights[b] ? a : b
+  );
+
+  // 🧾 final output
+  await typeLine(output, "\n--- SCAN COMPLETE ---", 15);
+  await typeLine(output, "Target: " + url.href, 15);
+
+  await typeLine(output, "\nFinal Findings:", 15);
+
+  if (discoveredFindings.length === 0) {
+    await typeLine(output, "• No significant issues detected", 12);
+  } else {
+    for (const f of discoveredFindings) {
+      await typeLine(output, "• " + f, 10);
+    }
+  }
+
+  await typeLine(output, "\nVulnerabilities Detected: " + discoveredFindings.length, 15);
+  await typeLine(output, "Risk Level: " + risk, 15);
+
+  if (risk === "CRITICAL") {
+    await typeLine(output, "Recommendation: Immediate action required ⚠", 15);
+  } else if (risk === "HIGH") {
+    await typeLine(output, "Recommendation: Urgent review recommended", 15);
+  } else {
+    await typeLine(output, "Recommendation: Monitor and improve security posture", 15);
+  }
+
+  await typeLine(
+    output,
+    "\nNote: This is a simulated preview. Full manual testing is performed during an official engagement.",
+    10
+  );
 }
-btn.disabled = false;
