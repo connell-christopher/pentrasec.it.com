@@ -1,42 +1,5 @@
-const btn = document.getElementById("scanBtn");
-btn.disabled = false;
-
-// ⌨️ Typewriter effect
-function typeLine(element, text, speed = 15) {
-  return new Promise(resolve => {
-    let i = 0;
-
-    function type() {
-      if (i < text.length) {
-        element.textContent += text.charAt(i);
-        i++;
-        setTimeout(type, speed);
-      } else {
-        element.textContent += "\n";
-        element.scrollTop = element.scrollHeight; // auto-scroll
-        resolve();
-      }
-    }
-
-    type();
-  });
-}
-
-async function runScan() {
-  const urlInput = document.getElementById("scanInput").value.trim();
-  const output = document.getElementById("scanOutput");
-
-  // ✅ URL validation
-  function isValidURL(str) {
-    try {
-      const u = new URL(str);
-      return u.protocol === "http:" || u.protocol === "https:";
-    } catch {
-      return false;
-    }
-  }
-
-  function runScan() {
+<script>
+function runScan() {
   const url = document.getElementById("scanInput").value;
   const output = document.getElementById("scanOutput");
 
@@ -114,10 +77,24 @@ async function runScan() {
     }
   }, 700);
 }
+</script>
 
-  await typeLine(
-    output,
-    "\nNote: This is a simulated preview. Full manual testing is performed during an official engagement.",
-    10
-  );
-}
+<script>
+document.getElementById('form').addEventListener('submit', function(e){
+
+  alert("Request received. Ensure you have authorization before any testing.");
+  this.reset();
+});
+</script>
+<script>
+let v = 0;
+let a = 0;
+
+setInterval(() => {
+  v += Math.floor(Math.random() * 3);
+  a += Math.floor(Math.random() * 1);
+
+  document.getElementById("vulnCount").textContent = v;
+  document.getElementById("appsTested").textContent = a;
+}, 2000);
+</script>
