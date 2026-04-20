@@ -345,11 +345,20 @@ footer {
 }
 
 #scanOutput {
-  background: rgba(2,6,23,0.8);
-  padding: 15px;
-  border-radius: 12px;
-  border: 1px solid rgba(59,130,246,0.2);
-  margin-top: 15px;
+  font-family: monospace;
+  white-space: pre-wrap;
+  overflow-y: auto;
+  max-height: 400px;
+}
+
+#scanOutput::after {
+  content: "_";
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
 }
 
 #scanInput {
