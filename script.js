@@ -80,7 +80,7 @@ function runScan() {
 </script>
 
 <script>
-document.getElementById('form').addEventListener('submit', function(e){
+document.getElementById('form').addEventListener('submit', function(e 
 
   alert("Request received. Ensure you have authorization before any testing.");
   this.reset();
