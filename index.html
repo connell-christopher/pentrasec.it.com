@@ -270,23 +270,28 @@ We focus on real-world web application security testing aligned with modern vuln
     </div>
    </section> 
 
-
+  <!-- ===== LIVE VULNERABILITY DASHBOARD ===== -->
 <section class="card">
-  <h2>Live Security Scan Preview</h2>
+  <h2>Live Vulnerability Dashboard</h2>
 
-  <p style="text-align:center; opacity:0.8;">
-    Enter your website to simulate a security analysis
-  </p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;text-align:center;">
 
-  <input id="scanInput" type="url" placeholder="https://your-website.com">
-<button onclick="runScan()" class="submit-btn" id="scanBtn">
-  Run Security Scan
-</button>  
+    <div class="card" style="margin:0;">
+      <h3 style="color:#60a5fa;font-size:2rem;">128</h3>
+      <p>Vulnerabilities Found</p>
+    </div>
 
-  <div id="scanOutput" style="margin-top:20px; font-family:monospace; white-space:pre-line;"></div>
-  <footer>
-   Note: Please be advised that the output of this scan is purely illustrative and does not represent a real security audit. A comprehensive and authenticated penetration test will be performed upon booking an official engagement.
-  </footer> 
+    <div class="card" style="margin:0;">
+      <h3 style="color:#facc15;font-size:2rem;">87%</h3>
+      <p>Risk Score</p>
+    </div>
+
+    <div class="card" style="margin:0;">
+      <h3 style="color:#22c55e;font-size:2rem;">42</h3>
+      <p>Apps Tested</p>
+    </div>
+
+  </div>
 </section>
 
 
