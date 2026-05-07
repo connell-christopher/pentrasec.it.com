@@ -1,6 +1,9 @@
 <script>
 document.addEventListener("DOMContentLoaded", () => {
 
+  // =========================
+  // SCAN FUNCTION
+  // =========================
   function runScan() {
     const inputEl = document.getElementById("scanInput");
     const output = document.getElementById("scanOutput");
@@ -77,10 +80,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 700);
   }
 
-  // Attach runScan globally so button can call it
+  // Expose globally
   window.runScan = runScan;
 
-  // Form handler
+  // =========================
+  // FORM HANDLER
+  // =========================
   const form = document.getElementById("form");
   if (form) {
     form.addEventListener("submit", function(e) {
@@ -90,42 +95,33 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Counters
-  let v = 0;
-  let a = 0;
+  // =========================
+  // LIVE COUNTERS (FIXED)
+  // =========================
+  const counters = document.querySelectorAll('.counter');
 
-  setInterval(() => {
-    v += Math.floor(Math.random() * 3);
-    a += Math.floor(Math.random() * 2);
+  const animateCounter = (counter) => {
+    counter.innerText = '0';
 
-    const vEl = document.getElementById("vulnCount");
-    const aEl = document.getElementById("appsTested");
-
-    if (vEl) vEl.textContent = v;
-    if (aEl) aEl.textContent = a;
-  }, 2000);
-
-});
-
-const counters = document.querySelectorAll('.counter');
-
-counters.forEach(counter => {
-  counter.innerText = '0';
-
-  const updateCounter = () => {
     const target = +counter.getAttribute('data-target');
-    const current = +counter.innerText;
+    const speed = 20;
 
-    const increment = Math.ceil(target / 100);
+    const update = () => {
+      const current = +counter.innerText;
+      const increment = Math.ceil(target / 100);
 
-    if (current < target) {
-      counter.innerText = current + increment;
-      setTimeout(updateCounter, 20);
-    } else {
-      counter.innerText = target;
-    }
+      if (current < target) {
+        counter.innerText = current + increment;
+        setTimeout(update, speed);
+      } else {
+        counter.innerText = target;
+      }
+    };
+
+    update();
   };
 
-  updateCounter();
+  counters.forEach(counter => animateCounter(counter));
+
 });
 </script>
