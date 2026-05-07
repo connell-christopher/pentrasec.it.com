@@ -8,7 +8,8 @@
   font-family: 'Inter', sans-serif;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
@@ -17,15 +18,6 @@ html, body {
 body {
   color: #e5e7eb;
   background: #050814;
-  position: relative;
-}
-
-/* Prevent images/media overflow */
-img,
-video,
-iframe {
-  max-width: 100%;
-  height: auto;
 }
 
 /* =========================
@@ -39,12 +31,18 @@ body::before {
   width: 140%;
   height: 140%;
   z-index: -1;
-  pointer-events: none;
 
   background:
     radial-gradient(circle at 20% 30%, rgba(59,130,246,0.12), transparent 40%),
     radial-gradient(circle at 80% 70%, rgba(59,130,246,0.10), transparent 45%),
     radial-gradient(circle at 60% 20%, rgba(59,130,246,0.08), transparent 50%),
+
+    repeating-conic-gradient(
+      from 0deg at 50% 50%,
+      rgba(59,130,246,0.05) 0deg 2deg,
+      transparent 2deg 10deg
+    ),
+
     linear-gradient(
       120deg,
       rgba(59,130,246,0.03),
@@ -52,7 +50,7 @@ body::before {
       rgba(59,130,246,0.02)
     );
 
-  filter: blur(40px);
+  filter: blur(40px) contrast(120%);
   animation: neuralDrift 25s ease-in-out infinite alternate;
 }
 
@@ -67,7 +65,7 @@ body::before {
 ========================= */
 header {
   text-align: center;
-  padding: 80px 20px;
+  padding: 90px 20px;
   background: rgba(15, 23, 42, 0.6);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(59,130,246,0.2);
@@ -78,14 +76,18 @@ header h1 {
   color: #60a5fa;
 }
 
-header p,
-.tagline {
+header p {
   color: #cbd5e1;
   margin-top: 10px;
 }
 
+.tagline {
+  color: #93c5fd;
+  margin-top: 10px;
+}
+
 /* =========================
-   BADGES
+   TRUST BADGES
 ========================= */
 .badges {
   margin-top: 20px;
@@ -106,30 +108,26 @@ header p,
 /* =========================
    BUTTONS
 ========================= */
-button,
-.submit-btn {
-  width: 100%;
-  max-width: 100%;
-  padding: 14px 20px;
+button {
   margin-top: 20px;
+  padding: 14px 28px;
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
   background: linear-gradient(135deg, #2563eb, #1d4ed8);
   color: white;
   cursor: pointer;
   transition: 0.3s;
 }
 
-button:hover,
-.submit-btn:hover {
-  transform: scale(1.02);
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(37,99,235,0.4);
 }
 
 /* =========================
-   MAIN LAYOUT
+   MAIN
 ========================= */
 main {
-  width: 100%;
   max-width: 1000px;
   margin: 40px auto;
   padding: 20px;
@@ -138,22 +136,19 @@ main {
 /* =========================
    CARDS
 ========================= */
-.card,
-.price-card {
-  width: 100%;
-  max-width: 100%;
+.card {
   background: rgba(15, 23, 42, 0.65);
   border: 1px solid rgba(59,130,246,0.15);
   border-radius: 16px;
-  padding: 20px;
+  padding: 22px;
   margin-bottom: 20px;
   backdrop-filter: blur(10px);
   transition: 0.3s;
 }
 
-.card:hover,
-.price-card:hover {
-  transform: translateY(-5px);
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(59,130,246,0.5);
 }
 
 h2 {
@@ -162,7 +157,7 @@ h2 {
 }
 
 /* =========================
-   PRICING GRID
+   PRICING
 ========================= */
 .pricing {
   display: grid;
@@ -170,25 +165,56 @@ h2 {
   gap: 20px;
 }
 
-/* =========================
-   FORMS
-========================= */
-form {
-  width: 100%;
+.price-card {
+  background: rgba(2,6,23,0.8);
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  transition: 0.3s;
 }
 
+.price-card:hover {
+  transform: translateY(-6px);
+  border-color: #60a5fa;
+}
+
+.price {
+  font-size: 1.5rem;
+  color: #60a5fa;
+  margin-top: 10px;
+}
+
+/* =========================
+   FORM
+========================= */
+form {
+  background: rgba(15,23,42,0.7);
+  border: 1px solid rgba(59,130,246,0.2);
+  padding: 25px;
+  border-radius: 16px;
+}
+
+/* =========================
+   INPUTS
+========================= */
 input,
 textarea,
 select,
 #scanInput {
   width: 100%;
-  max-width: 100%;
-  padding: 12px;
   margin-top: 10px;
+  padding: 12px;
   border-radius: 10px;
   border: 1px solid #1f2937;
   background: #0b1220;
   color: white;
+}
+
+#scanInput:focus {
+  border-color: #60a5fa;
+  box-shadow: 0 0 15px rgba(96,165,250,0.25);
+  outline: none;
 }
 
 /* =========================
@@ -197,32 +223,69 @@ select,
 .checkbox {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin-top: 15px;
-  flex-wrap: wrap;
+  cursor: pointer;
+  font-size: 0.9rem;
 }
 
 .checkbox input {
   width: 20px;
   height: 20px;
+  accent-color: #2563eb;
+}
+
+.checkbox input:checked {
+  filter: drop-shadow(0 0 6px #2563eb);
 }
 
 /* =========================
    SCAN OUTPUT
 ========================= */
 #scanOutput {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: auto;
-  overflow-y: auto;
-  max-height: 400px;
-  padding: 18px;
-  margin-top: 15px;
-  border-radius: 14px;
   background: rgba(2,6,23,0.9);
+  padding: 18px;
+  border-radius: 14px;
   border: 1px solid rgba(59,130,246,0.25);
+  margin-top: 15px;
   font-family: monospace;
-  white-space: pre-wrap;
+  white-space: pre-line;
+  min-height: 120px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+#scanOutput::after {
+  content: "_";
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
+}
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  margin-top: 18px;
+  border: none;
+  border-radius: 14px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  background: linear-gradient(135deg, #2563eb, #1d4ed8, #0ea5e9);
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* =========================
@@ -238,6 +301,11 @@ footer {
 .footer-link {
   color: #60a5fa;
   text-decoration: none;
+  font-weight: 600;
+}
+
+.footer-link:hover {
+  color: #93c5fd;
 }
 
 /* =========================
@@ -261,7 +329,22 @@ footer {
 }
 
 /* =========================
-   MOBILE RESPONSIVENESS
+   EXTRA
+========================= */
+#riskBar {
+  box-shadow: 0 0 12px rgba(239,68,68,0.4);
+}
+
+.identity {
+  color: deepskyblue;
+}
+
+.check-box {
+  color: red;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
 ========================= */
 @media (max-width: 768px) {
   header {
@@ -272,21 +355,85 @@ footer {
     padding: 15px;
   }
 
+  .pricing {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 18px;
+  }
+}
+
+
+/* =========================
+   UNIVERSAL MEDIA SAFETY
+========================= */
+img,
+video,
+iframe,
+canvas {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Prevent long text from breaking layout */
+p,
+h1,
+h2,
+h3,
+span,
+a {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* =========================
+   TABLET
+========================= */
+@media (max-width: 1024px) {
+  main {
+    padding: 18px;
+  }
+
+  header h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* =========================
+   MOBILE DEVICES
+========================= */
+@media (max-width: 768px) {
+  header {
+    padding: 50px 15px;
+  }
+
+  header h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  header p,
+  .tagline {
+    font-size: 0.95rem;
+  }
+
+  .badges {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .pricing {
+    grid-template-columns: 1fr;
+  }
+
   .card,
   .price-card {
     padding: 16px;
   }
 
-  h1 {
-    font-size: 2rem;
-  }
-
-  h2 {
-    font-size: 1.3rem;
-  }
-
-  .pricing {
-    grid-template-columns: 1fr;
+  main {
+    padding: 12px;
   }
 
   button,
@@ -295,9 +442,16 @@ footer {
   }
 }
 
+/* =========================
+   SMALL PHONES
+========================= */
 @media (max-width: 480px) {
   header h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
   }
 
   .badge {
@@ -305,7 +459,37 @@ footer {
     padding: 5px 10px;
   }
 
+  .card,
+  .price-card {
+    padding: 14px;
+  }
+
   #scanOutput {
     font-size: 12px;
+    padding: 12px;
+  }
+
+  form {
+    padding: 16px;
+  }
+}
+
+/* =========================
+   ULTRA SMALL DEVICES
+========================= */
+@media (max-width: 320px) {
+  header h1 {
+    font-size: 1.3rem;
+  }
+
+  button,
+  .submit-btn {
+    font-size: 0.85rem;
+    padding: 12px;
+  }
+
+  .badge {
+    width: 100%;
+    text-align: center;
   }
 }
