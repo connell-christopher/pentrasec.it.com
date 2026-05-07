@@ -54,7 +54,7 @@
 
   <div class="badges">
     <div class="badge">🔒 Confidential</div>
-    <div class="badge">🧠 Manual Testing</div>
+    <div class="badge">🧠 Manual Testing/ Automated recon</div>
     <div class="badge">⚡ Fast Reporting</div>
     <div class="badge">🎯 Real Exploitation</div>
   </div>
@@ -223,7 +223,7 @@ We focus on real-world web application security testing aligned with modern vuln
 <h2>Our Testing Process</h2>
 <ul>
   <li>Scope review & target analysis</li>
-  <li>Manual vulnerability testing</li>
+  <li>Automated Reconnaissance & Manual Testing</li>
   <li>Exploitation & validation</li>
   <li>Detailed reporting with fixes</li>
   <li>Post-fix verification</li>
@@ -231,45 +231,37 @@ We focus on real-world web application security testing aligned with modern vuln
 </section>  
 
 <section class="card">
-  <h2>Sample Security Findings</h2>
+  <h2>Security Assessment Coverage</h2>
 
   <p style="text-align:center; opacity:0.8;">
-    Examples of real-world vulnerabilities typically identified during assessments.
+    We focus on high-impact attack surfaces across modern applications and APIs.
   </p>
 
   <div style="display:grid; gap:15px; margin-top:20px;">
 
-    <!-- HIGH -->
     <div class="card" style="margin:0; border-left:4px solid #ef4444;">
-      <h3 style="color:#ef4444;">HIGH — Broken Access Control (IDOR)</h3>
+      <h3 style="color:#ef4444;">API Security Testing</h3>
       <p>
-        Users were able to access other users' sensitive data by modifying request parameters.
+        Assessment of REST and GraphQL APIs for authentication flaws, data exposure, and abuse scenarios.
       </p>
-      <p><b>Impact:</b> Unauthorized data exposure</p>
-      <p><b>Fix:</b> Implement proper server-side authorization checks</p>
     </div>
 
-    <!-- MEDIUM -->
     <div class="card" style="margin:0; border-left:4px solid #facc15;">
-      <h3 style="color:#facc15;">MEDIUM — Missing Security Headers</h3>
+      <h3 style="color:#facc15;">Web Application Security</h3>
       <p>
-        Application lacked critical headers such as CSP and X-Frame-Options.
+        Identification of vulnerabilities across modern web applications, including access control and input handling issues.
       </p>
-      <p><b>Impact:</b> Increased risk of XSS and clickjacking</p>
-      <p><b>Fix:</b> Configure secure HTTP response headers</p>
     </div>
 
-    <!-- CRITICAL -->
     <div class="card" style="margin:0; border-left:4px solid #dc2626;">
-      <h3 style="color:#dc2626;">CRITICAL — SQL Injection</h3>
+      <h3 style="color:#dc2626;">High-Impact Attack Surface Analysis</h3>
       <p>
-        Unsanitized input allowed direct database query manipulation.
+        Deep assessment of exposed services, endpoints, and business logic to identify critical security risks.
       </p>
-      <p><b>Impact:</b> Full database compromise</p>
-      <p><b>Fix:</b> Use parameterized queries and input validation</p>
     </div>
-   </section> 
 
+  </div>
+</section>
   <!-- ===== LIVE VULNERABILITY DASHBOARD ===== -->
 <section class="card">
   <h2>Live Vulnerability Dashboard</h2>
@@ -277,23 +269,22 @@ We focus on real-world web application security testing aligned with modern vuln
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;text-align:center;">
 
     <div class="card" style="margin:0;">
-      <h3 style="color:#60a5fa;font-size:2rem;">128</h3>
+      <h3 class="counter" data-target="128">0</h3>
       <p>Vulnerabilities Found</p>
     </div>
 
     <div class="card" style="margin:0;">
-      <h3 style="color:#facc15;font-size:2rem;">87%</h3>
+      <h3 class="counter" data-target="87">0</h3>
       <p>Risk Score</p>
     </div>
 
     <div class="card" style="margin:0;">
-      <h3 style="color:#22c55e;font-size:2rem;">42</h3>
+      <h3 class="counter" data-target="42">0</h3>
       <p>Apps Tested</p>
     </div>
 
   </div>
 </section>
-
 <section class="card">
 <h2>Pricing</h2>
 
@@ -357,8 +348,7 @@ We focus on real-world web application security testing aligned with modern vuln
 </form>
 
 <p style="text-align:center; color:#60a5fa; font-weight:600;">
-  ✔ All findings are validated manually — no automated false positives
-</p>
+✔ Verified security findings with actionable remediation guidance</p>
 
 </section>
 
