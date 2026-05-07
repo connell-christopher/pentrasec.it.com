@@ -274,7 +274,7 @@ We focus on real-world web application security testing aligned with modern vuln
     </div>
 
     <div class="card" style="margin:0;">
-      <h3 class="counter" data-target="87"% style="color:#facc15;font-size:2rem;">0%</h3>
+      <h3 class="counter" data-target="87" style="color:#facc15;font-size:2rem;">%</h3>
       <p>Risk Score</p>
     </div>
 
@@ -461,6 +461,28 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(counter);
   });
 });
+
+const update = () => {
+  const increment = Math.ceil(target / 100);
+  current += increment;
+
+  if (current < target) {
+    if (counter.classList.contains("percent-counter")) {
+      counter.innerText = current + "%";
+    } else {
+      counter.innerText = current;
+    }
+
+    setTimeout(update, 20);
+  } else {
+    if (counter.classList.contains("percent-counter")) {
+      counter.innerText = target + "%";
+    } else {
+      counter.innerText = target;
+    }
+  }
+};
+  
 </script>
   
 </body>
